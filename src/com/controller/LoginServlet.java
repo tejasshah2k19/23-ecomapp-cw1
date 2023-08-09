@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,23 +15,27 @@ import com.dao.UserDao;
 public class LoginServlet extends HttpServlet {
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		
+
 		UserDao userDao = new UserDao();
-		boolean ans = userDao.authenticate(email, password);
-		
-		if(ans == true) {
-			response.sendRedirect("Home.jsp");//home -> request no data 
-		}else {
+		HashMap<String, Object> map = userDao.authenticate(email, password);// if correct : true , else false
+
+		if (map != null) {
+			if (map.get("role").equals("ADMIN")) {
+				response.sendRedirect("Dashboard.jsp");// home -> request no data
+				
+			} else {
+				response.sendRedirect("Home.jsp");// home -> request no data
+			}
+		} else {
 			request.setAttribute("error", "Invalid Credentials");
 			request.getRequestDispatcher("Login.jsp").forward(request, response);
-			
+
 		}
-		
-		
-		
+
 	}
 }

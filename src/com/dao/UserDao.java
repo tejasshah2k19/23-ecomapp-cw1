@@ -3,6 +3,7 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 
 import com.util.DbConnection;
 
@@ -25,7 +26,7 @@ public class UserDao {
 
 	}
 
-	public boolean authenticate(String email, String password) {
+	public HashMap<String,Object> authenticate(String email, String password) {
 		try {
 			Connection con = DbConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement("select * from users where email = ? and password = ? ");
@@ -33,18 +34,22 @@ public class UserDao {
 			pstmt.setString(2, password);
 
 			ResultSet rs = pstmt.executeQuery(); // select
-
+			
 			if(rs.next()) {
-				return true;
+				HashMap<String, Object> hm = new HashMap<String, Object>();
+				hm.put("firstName",rs.getString("firstName"));
+				hm.put("role",rs.getString("role"));
+				hm.put("userId",rs.getInt("userId"));
+				return hm;
 			}else {
-				return false;
+				return null;
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return false;
+		return null;
 	}
 
 }
