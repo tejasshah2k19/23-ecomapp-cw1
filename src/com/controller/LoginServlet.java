@@ -32,10 +32,8 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect("Dashboard.jsp");// home -> request no data
 
 			} else {
-				ProductDao pdao = new ProductDao();
-				ArrayList<ProductBean> products = pdao.getAllproducts();
-				//send to Home.jsp 
-				response.sendRedirect("Home.jsp");// home -> request no data
+				response.sendRedirect("HomeServlet");
+				
 			}
 		} else {
 			request.setAttribute("error", "Invalid Credentials");
