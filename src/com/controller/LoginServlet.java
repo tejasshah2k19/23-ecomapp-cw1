@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ProductBean;
+import com.dao.ProductDao;
 import com.dao.UserDao;
 
 @WebServlet("/LoginServlet")
@@ -27,8 +30,11 @@ public class LoginServlet extends HttpServlet {
 		if (map != null) {
 			if (map.get("role").equals("ADMIN")) {
 				response.sendRedirect("Dashboard.jsp");// home -> request no data
-				
+
 			} else {
+				ProductDao pdao = new ProductDao();
+				ArrayList<ProductBean> products = pdao.getAllproducts();
+				//send to Home.jsp 
 				response.sendRedirect("Home.jsp");// home -> request no data
 			}
 		} else {
