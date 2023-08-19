@@ -32,4 +32,21 @@
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/HomeServlet</url-pattern>
   </servlet-mapping>
+  <session-config>
+    <session-timeout>3</session-timeout>
+  </session-config>
+  <servlet>
+    <description></description>
+    <display-name>SaveSessionTimeoutServlet</display-name>
+    <servlet-name>SaveSessionTimeoutServlet</servlet-name>
+    <servlet-class>com.controller.SaveSessionTimeoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveSessionTimeoutServlet</servlet-name>
+    <url-pattern>/SaveSessionTimeoutServlet</url-pattern>
+  </servlet-mapping>
+  <session-config>
+  	<session-timeout>3</session-timeout>
+  </session-config>
+  
 </web-app>

@@ -9,6 +9,8 @@
 <body>
 Dashboard<br><Br>
 
+<%=session.getAttribute("userId")%>
+<br>
 <a href="NewProduct.jsp">New Product</a><br><br>
 <a href="ListProductServlet">List Product</a><br><br>
 

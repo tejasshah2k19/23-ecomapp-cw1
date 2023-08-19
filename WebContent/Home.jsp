@@ -9,9 +9,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-Welcome , 
+Welcome ,<%=session.getAttribute("userId") %> 
 <br> 
 <br><br>
+<a href="LogoutServlet">Logout</a>
+<br><br>
+
+<a href="SessionTimeout.jsp">Configure SessionTimeout</a>
+<br><br>
+
 <% 
 	ArrayList<ProductBean> products = (	ArrayList<ProductBean>)request.getAttribute("products");
 %>
